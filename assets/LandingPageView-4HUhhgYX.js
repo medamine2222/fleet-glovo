@@ -1,0 +1,1 @@
+import{d as a,a as n,_ as s,o,c as t,e as r,l as c}from"./index-TJS2hmaO.js";const d=a({name:"LandingPageView",owner:n.Teams.C3PLS}),i={class:"landing-wrapper"},_={class:"landing-wrapper__container"};function p(e,l,m,f,g,u){return o(),t("main",i,[r("section",_,[c(e.$slots,"default",{},void 0,!0)])])}const $=s(d,[["render",p],["__scopeId","data-v-7366e275"]]);export{$ as L};
